@@ -4,15 +4,18 @@ import Image from "./Image";
 import Skeleton from "./Skeleton";
 
 const Images = () => {
-
-    const {response,isLoading} = useContext(ImageContext)
+  const { response, isLoading, searchImage } = useContext(ImageContext);
   return (
     <>
       <h1 className="text-center mt-6 text-2xl underline">
-        Results for your search
+        Results for {searchImage || "your search"}
       </h1>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 my-10 max-w-7xl mx-auto px-4">
-       {isLoading ? <Skeleton item={10}/> : response.map((data,key) => <Image key={key} data={data} /> )}
+        {isLoading ? (
+          <Skeleton item={10} />
+        ) : (
+          response.map((data, key) => <Image key={key} data={data} />)
+        )}
       </div>
     </>
   );
